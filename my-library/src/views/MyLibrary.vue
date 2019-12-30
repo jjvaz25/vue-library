@@ -6,7 +6,7 @@
       <v-row>    
         <v-col 
           v-for="item in library" :key="item.title"
-          cols="12" md="4" s="12"
+          cols="12" s="12" md="4"
           align="start"
           
         >
@@ -45,11 +45,17 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn>Completd</v-btn>
+              <v-btn :class="item.completed ? 'success' : 'warning'">
+                <v-icon>check</v-icon>
+              </v-btn>
               
               <v-spacer></v-spacer>
-              <v-btn >Edit</v-btn>
-              <v-btn >Delete</v-btn>
+              <v-btn class="primary">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn class="error">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-card-actions>
 
           </v-card>
