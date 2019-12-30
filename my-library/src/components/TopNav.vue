@@ -10,7 +10,7 @@
         flat
         color="primary" 
       >
-        <v-toolbar-title>
+        <v-toolbar-title>          
             <span>Spartan</span>
             <span class="font-weight-medium">Library</span>
         </v-toolbar-title>
@@ -60,6 +60,7 @@
               <v-btn 
                 v-on="on"
                 text
+                
               >
                 <v-icon>person</v-icon>
               </v-btn>
@@ -92,7 +93,7 @@ export default {
       links: [
         { icon: 'folder', text: 'My Library', route: '/' },
         { icon: 'folder_special', text: 'Wish List', route: '/wish-list' },
-        { icon: 'message', text: 'Contact', route: '/contact' },
+        { icon: 'email', text: 'Contact', route: '/contact' },
       ]
     }
   }
