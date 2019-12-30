@@ -1,8 +1,12 @@
 <template>
   <div class="my-library">
-    <h1 class="title grey--text text--darken-1">My Library</h1>
+    <div>
+      <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
+      <library-form />  
+    </div>
+    
 
-    <v-container fluid class="my-5">
+    <v-container class="my-5">
       <v-row>    
         <v-col 
           v-for="item in library" :key="item.title"
@@ -45,7 +49,7 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn :class="item.completed ? 'success' : 'secondary'">
+              <v-btn :class="item.completed ? 'success' : 'grey lighten-1 white--text'">
                 <v-icon>check</v-icon>
               </v-btn>
               
@@ -68,10 +72,12 @@
 
 <script>
 // @ is an alias to /src
+import Form from '../components/Form'
 
 export default {
   name: 'MyLibrary',
   components: {
+    'library-form': Form
   },
   data() {
     return {

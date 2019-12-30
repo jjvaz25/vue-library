@@ -60,7 +60,6 @@
               <v-btn 
                 v-on="on"
                 text
-                
               >
                 <v-icon>person</v-icon>
               </v-btn>
