@@ -18,16 +18,27 @@
             <v-container>
               <v-row>
                 <v-col cols="12" sm="6">
-                  <v-text-field v-model="title" label="title*" required></v-text-field>
+                  <v-text-field 
+                    v-model="title" 
+                    label="title*" 
+                    required
+                    prepend-icon="folder"
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
-                  <v-text-field v-model="creator" label="creator*" required></v-text-field>
+                  <v-text-field 
+                    v-model="creator" 
+                    label="creator*" 
+                    required
+                    prepend-icon="person"
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-select
                   :items="['Book', 'Video Game', 'Other']"
                   label="category*"
                   required
+                  prepend-icon="label"
                   ></v-select>
                 </v-col>
                 <v-col cols="12" sm="6">
@@ -35,6 +46,7 @@
                     v-model="rating"
                     :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
                     label="rating"
+                    prepend-icon="star"
                   ></v-select>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
@@ -68,7 +80,7 @@ export default {
   name: 'Form',
   data() {
     return {
-      dialogOpen: true,
+      dialogOpen: false,
       title: '',
       creator: '',
       category: '',
