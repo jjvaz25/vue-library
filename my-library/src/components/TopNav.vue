@@ -10,10 +10,9 @@
         flat
         color="primary" 
       >
-        <v-toolbar-title
-        >
-          <span>Spartan</span>
-          <span class="font-weight-medium">Library</span>
+        <v-toolbar-title>
+            <span>Spartan</span>
+            <span class="font-weight-medium">Library</span>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -36,14 +35,14 @@
               </v-btn>
             </template>
             <v-list>
-              <v-list-item>
-                <v-list-item-title>My Library</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>About</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title>Contact</v-list-item-title>
+              <v-list-item
+                v-for="link in links" :key="link.text"
+                router :to="link.route"
+              >
+                <v-icon left small>{{ link.icon }}</v-icon>
+                <v-list-item-content>
+                  <v-list-item-title>{{ link.text }}</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -67,9 +66,11 @@
             </template>
             <v-list>
               <v-list-item>
+                <v-icon small left>person</v-icon>
                 <v-list-item-title>My Account</v-list-item-title>
               </v-list-item>
               <v-list-item>
+                <v-icon small left>exit_to_app</v-icon>
                 <v-list-item-title>Sign out</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -86,6 +87,18 @@
 
 export default {
   name: 'TopNav',
-
+  data() {
+    return {
+      links: [
+        { icon: 'folder', text: 'My Library', route: '/' },
+        { icon: 'folder_special', text: 'Wish List', route: '/wish-list' },
+        { icon: 'message', text: 'Contact', route: '/contact' },
+      ]
+    }
+  }
 }
 </script>
+
+<style>
+
+</style>
