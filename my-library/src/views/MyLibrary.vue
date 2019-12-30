@@ -45,7 +45,7 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn :class="item.completed ? 'success' : 'warning'">
+              <v-btn :class="item.completed ? 'success' : 'secondary'">
                 <v-icon>check</v-icon>
               </v-btn>
               
