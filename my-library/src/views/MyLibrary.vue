@@ -6,7 +6,7 @@
       <v-row>    
         <v-col 
           v-for="item in library" :key="item.title"
-          cols="12" lg="4" md="6" s="12"
+          cols="12" md="4" s="12"
           align="start"
           
         >
@@ -21,7 +21,7 @@
                   <div v-if="item.completed" class="overline mb-4">Completed</div>
                   <div v-else class="overline mb-4">Incomplete</div>
                 </div>
-                <v-list-item-title class="headline mb-1">{{ item.title }}</v-list-item-title>
+                <v-list-item-title class="headline mb-1 text-wrap">{{ item.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ item.creator }}</v-list-item-subtitle>
                 <v-list-item-subtitle>{{ item.rating }}/10</v-list-item-subtitle>
               </v-list-item-content>
