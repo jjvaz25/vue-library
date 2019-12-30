@@ -31,7 +31,7 @@
                 v-on="on"
                 text
               >
-                <v-icon>expand_more</v-icon>
+                <v-icon left >expand_more</v-icon>
                 <span>get started</span>
               </v-btn>
             </template>
@@ -44,6 +44,33 @@
               </v-list-item>
               <v-list-item>
                 <v-list-item-title>Contact</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+        
+        <div class="text-center">
+          <v-menu
+            offset-y
+            origin="top center"
+            transition="scale-transition"
+          >
+            <template 
+              v-slot:activator="{ on }"
+            >
+              <v-btn 
+                v-on="on"
+                text
+              >
+                <v-icon>person</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>My Account</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>Sign out</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
