@@ -62,7 +62,7 @@
 
             <v-card-actions>
               <v-btn 
-                @click="item.completed = !item.completed"
+                @click="toggleCompletion(item, item.id)"
                 :class="item.completed ? 'success' : 'grey lighten-1 white--text'"
               >
                 <v-icon>check</v-icon>
@@ -116,6 +116,14 @@ export default {
         snapshot.docs.forEach(doc => {
           console.log(doc.data())
         })
+      })
+    },
+    toggleCompletion(item, id) {
+      item.completed = !item.completed
+      // console.log(id)
+      // console.log(item.completed)
+      db.collection('library').doc(id).update({
+        completed: item.completed
       })
     }
   },
