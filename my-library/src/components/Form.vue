@@ -103,7 +103,8 @@ export default {
           creator: this.creator,
           category: this.category,
           completed: this.completed,
-          rating: this.rating
+          rating: this.rating,
+          time: new Date()
         }
         db.collection('library').add(item).then(() => {
           this.loading = false

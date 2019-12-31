@@ -6,7 +6,16 @@
     </v-snackbar>
     <div>
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
-      <library-form @itemAdded="snackbar = true"/>  
+      <library-form @itemAdded="snackbar = true"/>
+      <v-form>
+        <v-text-field
+          v-model="search"
+          placeholder="search"
+          prepend-icon="search"
+        >
+        </v-text-field>
+        <v-btn @click="submitSearch">Go</v-btn>
+      </v-form>
     </div>
     
 
@@ -93,15 +102,23 @@ export default {
     return {
       library: [],
       snackbar: false,
+      search: "The Odin Project"
     }
   },
   methods: {
     deleteItem(id) {
       db.collection('library').doc(id).delete();
+    },
+    submitSearch() {
+      db.collection('library').where('title', '==', this.search).get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+          console.log(doc.data())
+        })
+      })
     }
   },
   created() {
-    db.collection('library').onSnapshot(res => {
+    db.collection('library').orderBy('time').onSnapshot(res => {
       const changes = res.docChanges();
       changes.forEach(change => {
         if (change.type === 'added') {
@@ -111,7 +128,7 @@ export default {
           })
         }
       })
-    })
+    });
   }
 }
 </script>
