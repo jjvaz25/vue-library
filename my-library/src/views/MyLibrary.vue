@@ -1,8 +1,12 @@
 <template>
   <div class="my-library">
+    <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+      <span>Item was successfully added to library!</span>
+      <v-btn text color="white" @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <div>
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
-      <library-form />  
+      <library-form @itemAdded="snackbar = true"/>  
     </div>
     
 
@@ -87,7 +91,8 @@ export default {
         { title: 'My Brilliant Friend', creator: 'Elena Ferrante', category: 'Book', completed: true, rating: 8 },
         { title: 'Zen and the Art of Motorcycle Maintenance', creator: 'Robert M. Pirsig', category: 'Book', completed: false, rating: 3 },
         { title: 'The Odin Project', creator: 'Open Source', category: 'Other', completed: false, rating: 10 },
-      ]
+      ],
+      snackbar: true,
     }
   }
 }

@@ -64,7 +64,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn class="error" text @click="dialogOpen = false">Cancel</v-btn>
-          <v-btn @click="submit" class="success" text>Submit</v-btn>
+          <v-btn @click="submit" class="success" text :loading="loading">Submit</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import db from '../fb'
 
 export default {
   name: 'Form',
@@ -89,12 +90,14 @@ export default {
       creator: '',
       category: '',
       completed: false,
-      rating: null
+      rating: null,
+      loading: false,
     }
   },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
         const item = {
           title: this.title,
           creator: this.creator,
@@ -102,7 +105,13 @@ export default {
           completed: this.completed,
           rating: this.rating
         }
-        console.log(item)
+        db.collection('library').add(item).then(() => {
+          console.log('added to database')
+          this.loading = false
+          this.dialogOpen = false
+          this.$emit('itemAdded')
+          this.resetData()
+        })
       }
     },
     resetData() {
