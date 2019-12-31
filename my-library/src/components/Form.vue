@@ -21,7 +21,7 @@
                   <v-text-field 
                     v-model="title" 
                     label="title*" 
-                    required
+                    :rules="inputRules"
                     prepend-icon="folder"
                   ></v-text-field>
                 </v-col>
@@ -29,15 +29,16 @@
                   <v-text-field 
                     v-model="creator" 
                     label="creator*" 
-                    required
+                    :rules="inputRules"
                     prepend-icon="person"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6">
                   <v-select
+                  v-model="category"
                   :items="['Book', 'Video Game', 'Other']"
                   label="category*"
-                  required
+                  :rules="inputRules"
                   prepend-icon="label"
                   ></v-select>
                 </v-col>
@@ -63,7 +64,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn class="error" text @click="dialogOpen = false">Cancel</v-btn>
-          <v-btn class="success" text>Submit</v-btn>
+          <v-btn @click="submit" class="success" text>Submit</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -81,12 +82,37 @@ export default {
   data() {
     return {
       dialogOpen: false,
+      inputRules: [
+        v=> (v.length && v.length >= 1) || 'Field is required' 
+      ],
       title: '',
       creator: '',
       category: '',
-      completed: '',
-      rating: ''
+      completed: false,
+      rating: null
     }
+  },
+  methods: {
+    submit() {
+      if (this.$refs.form.validate()) {
+        const item = {
+          title: this.title,
+          creator: this.creator,
+          category: this.category,
+          completed: this.completed,
+          rating: this.rating
+        }
+        console.log(item)
+      }
+    },
+    resetData() {
+      this.title = ''
+      this.creator = ''
+      this.category = ''
+      this.completed = false
+      this.rating = null
+    }
+
   }
 }
 </script>
