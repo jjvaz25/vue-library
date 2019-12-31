@@ -54,7 +54,11 @@
 
             <v-card-actions>
               <v-btn :class="item.completed ? 'success' : 'grey lighten-1 white--text'">
-                <v-icon>check</v-icon>
+                <v-icon
+                  @click="item.completed = !item.completed"
+                >
+                  check
+                </v-icon>
               </v-btn>
               
               <v-spacer></v-spacer>
