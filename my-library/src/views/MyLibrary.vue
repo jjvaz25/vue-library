@@ -77,6 +77,7 @@
 <script>
 // @ is an alias to /src
 import Form from '../components/Form'
+import db from '../fb'
 
 export default {
   name: 'MyLibrary',
@@ -85,15 +86,22 @@ export default {
   },
   data() {
     return {
-      library: [
-        { title: 'The Last of Us', creator: 'Naughty Dog', category: 'Video Game', completed: true, rating: 8 },
-        { title: 'Metal Gear Solid V', creator: 'Konami', category: 'Video Game', completed: true, rating: 9 },
-        { title: 'My Brilliant Friend', creator: 'Elena Ferrante', category: 'Book', completed: true, rating: 8 },
-        { title: 'Zen and the Art of Motorcycle Maintenance', creator: 'Robert M. Pirsig', category: 'Book', completed: false, rating: 3 },
-        { title: 'The Odin Project', creator: 'Open Source', category: 'Other', completed: false, rating: 10 },
-      ],
-      snackbar: true,
+      library: [],
+      snackbar: false,
     }
+  },
+  created() {
+    db.collection('library').onSnapshot(res => {
+      const changes = res.docChanges();
+      changes.forEach(change => {
+        if (change.type === 'added') {
+          this.library.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          })
+        }
+      })
+    })
   }
 }
 </script>

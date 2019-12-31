@@ -84,7 +84,7 @@ export default {
     return {
       dialogOpen: false,
       inputRules: [
-        v=> (v.length && v.length >= 1) || 'Field is required' 
+        v=> (v && v.length >= 1) || 'Field is required' 
       ],
       title: '',
       creator: '',
@@ -106,18 +106,17 @@ export default {
           rating: this.rating
         }
         db.collection('library').add(item).then(() => {
-          console.log('added to database')
           this.loading = false
           this.dialogOpen = false
           this.$emit('itemAdded')
-          this.resetData()
+          this.$refs.form.reset()
         })
       }
     },
     resetData() {
-      this.title = ''
-      this.creator = ''
-      this.category = ''
+      this.title = null
+      this.creator = null
+      this.category = null
       this.completed = false
       this.rating = null
     }
