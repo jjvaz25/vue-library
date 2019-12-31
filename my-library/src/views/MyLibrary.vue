@@ -107,7 +107,9 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      db.collection('library').doc(id).delete();
+      db.collection('library').doc(id).delete()
+      const index = this.library.findIndex(item => item.id === id )
+      this.library.splice(index, 1)
     },
     submitSearch() {
       db.collection('library').where('title', '==', this.search).get().then((snapshot) => {

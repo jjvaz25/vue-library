@@ -114,14 +114,6 @@ export default {
         })
       }
     },
-    resetData() {
-      this.title = null
-      this.creator = null
-      this.category = null
-      this.completed = false
-      this.rating = null
-    }
-
   }
 }
 </script>
