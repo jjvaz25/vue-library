@@ -13,10 +13,9 @@
     <v-container class="my-5">
       <v-row>    
         <v-col 
-          v-for="item in library" :key="item.title"
+          v-for="item in library" :key="item.id "
           cols="12" s="12" md="4"
           align="start"
-          
         >
           <v-card 
             class="mx-auto"
@@ -53,19 +52,21 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn :class="item.completed ? 'success' : 'grey lighten-1 white--text'">
-                <v-icon
-                  @click="item.completed = !item.completed"
-                >
-                  check
-                </v-icon>
+              <v-btn 
+                @click="item.completed = !item.completed"
+                :class="item.completed ? 'success' : 'grey lighten-1 white--text'"
+              >
+                <v-icon>check</v-icon>
               </v-btn>
               
               <v-spacer></v-spacer>
               <v-btn class="primary">
                 <v-icon>edit</v-icon>
               </v-btn>
-              <v-btn class="error">
+              <v-btn 
+                @click="deleteItem(item.id)"
+                class="error"
+              >
                 <v-icon>delete</v-icon>
               </v-btn>
             </v-card-actions>
@@ -92,6 +93,11 @@ export default {
     return {
       library: [],
       snackbar: false,
+    }
+  },
+  methods: {
+    deleteItem(id) {
+      db.collection('library').doc(id).delete();
     }
   },
   created() {
