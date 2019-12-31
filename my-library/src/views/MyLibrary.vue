@@ -69,12 +69,17 @@
               </v-btn>
               
               <v-spacer></v-spacer>
-              <v-btn class="primary">
-                <v-icon>edit</v-icon>
-              </v-btn>
+              <!-- <v-btn
+                class="primary"
+              > -->
+                <edit-form 
+                  :itemInfo="{ title: item.title, creator: item.creator, category: item.category, rating: item.rating, id: item.id  }"
+                />
+                <!-- <v-icon>edit</v-icon>
+              </v-btn> -->
               <v-btn 
                 @click="deleteItem(item.id)"
-                class="error"
+                class="mx-2 error"
               >
                 <v-icon>delete</v-icon>
               </v-btn>
@@ -91,12 +96,14 @@
 <script>
 // @ is an alias to /src
 import Form from '../components/Form'
+import EditForm from '../components/EditForm'
 import db from '../fb'
 
 export default {
   name: 'MyLibrary',
   components: {
-    'library-form': Form
+    'library-form': Form,
+    'edit-form': EditForm
   },
   data() {
     return {
@@ -119,12 +126,15 @@ export default {
       })
     },
     toggleCompletion(item, id) {
+      // console.log(item, id)
+      // console.log(this.library)
       item.completed = !item.completed
-      // console.log(id)
-      // console.log(item.completed)
+      // console.log(this.library)
       db.collection('library').doc(id).update({
         completed: item.completed
       })
+      // const index = this.library.findIndex(item => item.id === id )
+      // this.library[index].completed = item.completed
     }
   },
   created() {
