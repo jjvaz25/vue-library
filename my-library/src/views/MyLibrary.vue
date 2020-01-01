@@ -47,7 +47,7 @@
                 </div>
                 <v-list-item-title class="headline mb-1 text-wrap">{{ item.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ item.creator }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ item.rating }}/10</v-list-item-subtitle>
+                <v-list-item-subtitle v-show="item.rating">{{ item.rating }}/10</v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-avatar
