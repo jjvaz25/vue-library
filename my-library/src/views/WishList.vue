@@ -1,5 +1,5 @@
 <template>
-  <div class="my-library">
+  <div class="my-wishlist">
     <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
       <span>Item was successfully added to your wish list!</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
@@ -51,9 +51,10 @@
               </v-btn>
               
               <v-spacer></v-spacer>
-              <v-btn class="primary">
-                <v-icon>edit</v-icon>
-              </v-btn>
+              <edit-wishlist-form 
+                :wishlistItemInfo="{ title: item.title, creator: item.creator, category: item.category, id: item.id }"
+              />
+
               <v-btn 
                 @click="deleteItem(item.id)"
                 class="mx-2 error"
@@ -73,22 +74,18 @@
 <script>
 import db from '../fb'
 import WishlistForm from '../components/WishlistForm'
+import EditWishlistForm from '../components/EditWishlistForm'
 
 
 export default {
   name: 'WishList',
   components: {
-    'wishlist-form': WishlistForm
+    'wishlist-form': WishlistForm,
+    'edit-wishlist-form': EditWishlistForm
   },
   data() {
     return {
-      wishlist: [
-        // { title: "The Legend of Zelda: Link's Awakening", creator: 'Nintedo', category: 'Video Game', purchased: true },
-        // { title: 'Surfing with Sartre: An Aquatic Inquiry Into a Life of Meaning', creator: 'Aaron James', category: 'Book', purchased: false },
-        // { title: 'Final Fantasy VII Remake', creator: 'Square Enix', category: 'Video Game', purchased: false },
-        // { title: 'The Mythical Man-Month', creator: 'Fred Brooks', category: 'Book', purchased: false },
-        // { title: 'Untitled Album', creator: 'Kendrick Lamar', category: 'Other', purchased: false }
-      ],
+      wishlist: [],
       snackbar: false,
     }
   },
@@ -98,6 +95,12 @@ export default {
       const index = this.wishlist.findIndex(item => item.id === id )
       this.wishlist.splice(index, 1)
     },
+    updateDisplay(doc) {
+      const index = this.wishlist.findIndex(item => item.id === doc.id )
+      this.wishlist[index].title = doc.data().title
+      this.wishlist[index].creator = doc.data().creator
+      this.wishlist[index].category = doc.data().category
+    }
   },
 
   created() {
@@ -110,7 +113,7 @@ export default {
             id: change.doc.id
           })
         } else if (change.type === 'modified') {
-          console.log('something has changed.')
+          this.updateDisplay(change.doc)
         }
       })
     })
@@ -131,11 +134,11 @@ export default {
       // })
     // },
   //   updateDisplay(doc) {
-  //     const index = this.library.findIndex(item => item.id === doc.id )
-  //     this.library[index].title = doc.data().title
-  //     this.library[index].creator = doc.data().creator
-  //     this.library[index].category = doc.data().category
-  //     this.library[index].rating = doc.data().rating
+      // const index = this.library.findIndex(item => item.id === doc.id )
+      // this.library[index].title = doc.data().title
+      // this.library[index].creator = doc.data().creator
+      // this.library[index].category = doc.data().category
+      // this.library[index].rating = doc.data().rating
   //   }
   // },
   // created() {
