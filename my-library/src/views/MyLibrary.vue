@@ -8,10 +8,23 @@
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
       <library-form @itemAdded="snackbar = true"/>
     </div>
-    
 
     <v-container class="my-5">
-      <v-row>    
+
+      <v-row>
+        <v-col class="text-center text-md-left">
+          <v-btn text small color="primary" @click="sortBy('title')">
+            <v-icon left >folder</v-icon>
+            <span class="caption text-lowercase">By title</span>
+          </v-btn>
+          <v-btn text small color="primary" @click="sortBy('completed')">
+            <v-icon left >done</v-icon>
+            <span class="caption text-lowercase">By completion status </span>
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row>   
         <v-col 
           v-for="item in library" :key="item.id "
           cols="12" s="12" md="4"
@@ -98,6 +111,10 @@ export default {
     }
   },
   methods: {
+    sortBy(prop) {
+      console.log('hey')
+      this.library.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
+    },
     deleteItem(id) {
       db.collection('library').doc(id).delete()
       const index = this.library.findIndex(item => item.id === id )

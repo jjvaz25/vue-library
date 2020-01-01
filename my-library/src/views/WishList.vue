@@ -10,6 +10,20 @@
     </div>
 
     <v-container class="my-5">
+
+      <v-row>
+        <v-col class="text-center text-md-left">
+        <v-btn text small color="primary" @click="sortBy('title')">
+          <v-icon left >folder</v-icon>
+          <span class="caption text-lowercase">By title</span>
+        </v-btn>
+        <v-btn cols="12" s="3" text small color="primary" @click="sortBy('purchased')">
+          <v-icon left >library_add</v-icon>
+          <span class="caption text-lowercase">By purchase status </span>
+        </v-btn>
+        </v-col>
+      </v-row>
+
       <v-row>    
         <v-col 
           v-for="item in wishlist" :key="item.title "
@@ -92,6 +106,10 @@ export default {
     }
   },
   methods: {
+    sortBy(prop) {
+      console.log('hey')
+      this.wishlist.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
+    },
     deleteItem(id) {
       db.collection('wishlist').doc(id).delete()
       const index = this.wishlist.findIndex(item => item.id === id )
@@ -126,14 +144,5 @@ export default {
       })
     })
   },
-
-    // toggleCompletion(item, id) {
-    // toggleCompletion(item) {
-    //   item.purchased = !item.purchased
-      // db.collection('library').doc(id).update({
-      //   completed: item.completed
-      // })
-    // },
-
 }
 </script>
