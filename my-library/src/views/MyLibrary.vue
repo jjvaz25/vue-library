@@ -7,15 +7,6 @@
     <div>
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
       <library-form @itemAdded="snackbar = true"/>
-      <v-form>
-        <v-text-field
-          v-model="search"
-          placeholder="search"
-          prepend-icon="search"
-        >
-        </v-text-field>
-        <v-btn @click="submitSearch">Go</v-btn>
-      </v-form>
     </div>
     
 
@@ -104,7 +95,6 @@ export default {
     return {
       library: [],
       snackbar: false,
-      search: "The Odin Project"
     }
   },
   methods: {
@@ -112,13 +102,6 @@ export default {
       db.collection('library').doc(id).delete()
       const index = this.library.findIndex(item => item.id === id )
       this.library.splice(index, 1)
-    },
-    submitSearch() {
-      db.collection('library').where('title', '==', this.search).get().then((snapshot) => {
-        snapshot.docs.forEach(doc => {
-          console.log(doc.data())
-        })
-      })
     },
     toggleCompletion(item, id) {
       item.completed = !item.completed
