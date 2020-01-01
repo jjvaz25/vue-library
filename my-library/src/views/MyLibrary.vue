@@ -126,15 +126,18 @@ export default {
       })
     },
     toggleCompletion(item, id) {
-      // console.log(item, id)
-      // console.log(this.library)
       item.completed = !item.completed
-      // console.log(this.library)
       db.collection('library').doc(id).update({
         completed: item.completed
       })
-      // const index = this.library.findIndex(item => item.id === id )
-      // this.library[index].completed = item.completed
+    },
+    updateDisplay(doc) {
+      console.log('in update display')
+      const index = this.library.findIndex(item => item.id === doc.id )
+      this.library[index].title = doc.data().title
+      this.library[index].creator = doc.data().creator
+      this.library[index].category = doc.data().category
+      this.library[index].rating = doc.data().rating
     }
   },
   created() {
@@ -146,9 +149,26 @@ export default {
             ...change.doc.data(),
             id: change.doc.id
           })
+        // } else if (change.type === 'modified') {
+        //   console.log('something got changed!!!')
+          // console.log(change.doc.data())
+          // console.log(change.doc.id)
+          // const index = this.library.findIndex(item => item.id === change.doc.id )
+          // console.log(this.library[index])
+          // this.library[index] = change.doc.data()
+          // console.log(this.library[index])
+          // this.library.push({
+          //   ...change.doc.data(),
+          //   id: change.doc.id
+          // })
+        } else if (change.type === 'modified') {
+          console.log("something changed")
+          this.updateDisplay(change.doc)
+          // console.log(change.doc)
+          // console.log(change.doc.id)
         }
       })
-    });
+    })
   }
 }
 </script>

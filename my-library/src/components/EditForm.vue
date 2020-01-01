@@ -115,9 +115,11 @@ export default {
           creator: item.creator,
           category: item.category,
           rating: item.rating
+        }).then(() => {
+          this.loading = false
+          this.dialogOpen = false
         })
-        this.loading = false
-        this.dialogOpen = false
+        
         // console.log(item)
         // db.collection('library').add(item).then(() => {
         //   this.loading = false
