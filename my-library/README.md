@@ -1,24 +1,3 @@
-# my-library
+A library where you can organize a variety of things (books, magazines, video games, etc) that you've completed, or want to complete.
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+You can also add items which you desire to read, play, etc to a wishlist.
