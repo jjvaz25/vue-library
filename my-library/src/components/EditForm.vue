@@ -50,12 +50,6 @@
                     prepend-icon="star"
                   ></v-select>
                 </v-col>
-                <!-- <v-col cols="12" sm="6" md="4">
-                  <v-checkbox
-                    v-model="completed"
-                    label="Completed?"
-                  ></v-checkbox>
-                </v-col> -->
               </v-row>
             </v-container>
             <small>*indicates required field</small>
@@ -92,7 +86,6 @@ export default {
       title: this.itemInfo.title,
       creator: this.itemInfo.creator,
       category: this.itemInfo.category,
-      // completed: this.itemInfo.completed,
       rating: this.itemInfo.rating,
       id: this.itemInfo.id,
       loading: false,
@@ -100,7 +93,6 @@ export default {
   },
   methods: {
     submit() {
-      console.log(this.itemInfo)
       if (this.$refs.form.validate()) {
         this.loading = true;
         const item = {
@@ -119,14 +111,6 @@ export default {
           this.loading = false
           this.dialogOpen = false
         })
-        
-        // console.log(item)
-        // db.collection('library').add(item).then(() => {
-        //   this.loading = false
-        //   this.dialogOpen = false
-        //   this.$emit('itemAdded')
-        //   this.$refs.form.reset()
-        // })
       }
     },
   }

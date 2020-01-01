@@ -69,14 +69,9 @@
               </v-btn>
               
               <v-spacer></v-spacer>
-              <!-- <v-btn
-                class="primary"
-              > -->
                 <edit-form 
                   :itemInfo="{ title: item.title, creator: item.creator, category: item.category, rating: item.rating, id: item.id  }"
                 />
-                <!-- <v-icon>edit</v-icon>
-              </v-btn> -->
               <v-btn 
                 @click="deleteItem(item.id)"
                 class="mx-2 error"
@@ -132,7 +127,6 @@ export default {
       })
     },
     updateDisplay(doc) {
-      console.log('in update display')
       const index = this.library.findIndex(item => item.id === doc.id )
       this.library[index].title = doc.data().title
       this.library[index].creator = doc.data().creator
@@ -149,23 +143,8 @@ export default {
             ...change.doc.data(),
             id: change.doc.id
           })
-        // } else if (change.type === 'modified') {
-        //   console.log('something got changed!!!')
-          // console.log(change.doc.data())
-          // console.log(change.doc.id)
-          // const index = this.library.findIndex(item => item.id === change.doc.id )
-          // console.log(this.library[index])
-          // this.library[index] = change.doc.data()
-          // console.log(this.library[index])
-          // this.library.push({
-          //   ...change.doc.data(),
-          //   id: change.doc.id
-          // })
         } else if (change.type === 'modified') {
-          console.log("something changed")
           this.updateDisplay(change.doc)
-          // console.log(change.doc)
-          // console.log(change.doc.id)
         }
       })
     })
