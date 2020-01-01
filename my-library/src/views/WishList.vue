@@ -46,8 +46,10 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn :class="item.purchased ? 'success' : 'grey lighten-1 white--text'">
-                <v-icon>check</v-icon>
+              <v-btn 
+                @click="togglePurchased(item, item.id)"
+                :class="item.purchased ? 'success' : 'grey lighten-1 white--text'">
+                <v-icon>library_add</v-icon>
               </v-btn>
               
               <v-spacer></v-spacer>
@@ -100,6 +102,12 @@ export default {
       this.wishlist[index].title = doc.data().title
       this.wishlist[index].creator = doc.data().creator
       this.wishlist[index].category = doc.data().category
+    },
+    togglePurchased(item, id) {
+      item.purchased = !item.purchased
+      db.collection('wishlist').doc(id).update({
+        purchased: item.purchased
+      })
     }
   },
 
@@ -119,13 +127,6 @@ export default {
     })
   },
 
-  //   submitSearch() {
-  //     db.collection('library').where('title', '==', this.search).get().then((snapshot) => {
-  //       snapshot.docs.forEach(doc => {
-  //         console.log(doc.data())
-  //       })
-  //     })
-  //   },
     // toggleCompletion(item, id) {
     // toggleCompletion(item) {
     //   item.purchased = !item.purchased
@@ -133,27 +134,6 @@ export default {
       //   completed: item.completed
       // })
     // },
-  //   updateDisplay(doc) {
-      // const index = this.library.findIndex(item => item.id === doc.id )
-      // this.library[index].title = doc.data().title
-      // this.library[index].creator = doc.data().creator
-      // this.library[index].category = doc.data().category
-      // this.library[index].rating = doc.data().rating
-  //   }
-  // },
-  // created() {
-  //   db.collection('library').orderBy('time').onSnapshot(res => {
-  //     const changes = res.docChanges();
-  //     changes.forEach(change => {
-  //       if (change.type === 'added') {
-  //         this.library.push({
-  //           ...change.doc.data(),
-  //           id: change.doc.id
-  //         })
-  //       } else if (change.type === 'modified') {
-  //         this.updateDisplay(change.doc)
-  //       }
-  //     })
-  //   })
+
 }
 </script>
