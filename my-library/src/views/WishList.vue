@@ -64,11 +64,18 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn 
-                @click="togglePurchased(item, item.id)"
-                :class="item.purchased ? 'success' : 'grey lighten-1 white--text'">
-                <v-icon>library_add</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    v-on="on" 
+                    @click="togglePurchased(item, item.id)"
+                    :class="item.purchased ? 'success' : 'grey lighten-1 white--text'">
+                    <v-icon>library_add</v-icon>
+                  </v-btn> 
+                </template>
+                <span v-show="item.purchased">Remove purchased status</span>
+                <span v-show="!item.purchased">Mark item as purchased</span>
+              </v-tooltip>
               
               <v-spacer></v-spacer>
               <edit-wishlist-form 

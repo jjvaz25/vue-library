@@ -69,12 +69,19 @@
             </v-list-item>
 
             <v-card-actions>
-              <v-btn 
-                @click="toggleCompletion(item, item.id)"
-                :class="item.completed ? 'success' : 'grey lighten-1 white--text'"
-              >
-                <v-icon>check</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    v-on="on" 
+                    @click="toggleCompletion(item, item.id)"
+                    :class="item.completed ? 'success' : 'grey lighten-1 white--text'"
+                  >
+                    <v-icon>check</v-icon>
+                  </v-btn>
+                </template>
+                <span v-show="item.completed">Mark item as incomplete</span>
+                <span v-show="!item.completed">Mark item as completed</span>
+              </v-tooltip>
               
               <v-spacer></v-spacer>
                 <edit-form 
