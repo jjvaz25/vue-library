@@ -4,6 +4,10 @@
       <span>Item was successfully added to your wish list!</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar>
+    <v-snackbar v-model="deleteSnackbar" :timeout="4000" top color="success">
+      <span>Item successfully deleted from wishlist.</span>
+      <v-btn text color="white" @click="deleteSnackbar = false">Close</v-btn>
+    </v-snackbar>
     <div>
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Wish List</h1>
       <wishlist-form @wishItemAdded="snackbar = true"/>
@@ -103,6 +107,7 @@ export default {
     return {
       wishlist: [],
       snackbar: false,
+      deleteSnackbar: false
     }
   },
   methods: {
@@ -114,6 +119,7 @@ export default {
       db.collection('wishlist').doc(id).delete()
       const index = this.wishlist.findIndex(item => item.id === id )
       this.wishlist.splice(index, 1)
+      this.deleteSnackbar = true
     },
     updateDisplay(doc) {
       const index = this.wishlist.findIndex(item => item.id === doc.id )

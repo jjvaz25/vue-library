@@ -1,8 +1,12 @@
 <template>
   <div class="my-library">
     <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
-      <span>Item was successfully added to library!</span>
+      <span>Item successfully added to library!</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
+    <v-snackbar v-model="deleteSnackbar" :timeout="4000" top color="success">
+      <span>Item successfully deleted from library.</span>
+      <v-btn text color="white" @click="deleteSnackbar = false">Close</v-btn>
     </v-snackbar>
     <div>
       <h1 class="my-5 mx-4 title grey--text text--darken-1">My Library</h1>
@@ -108,6 +112,7 @@ export default {
     return {
       library: [],
       snackbar: false,
+      deleteSnackbar: false
     }
   },
   methods: {
@@ -119,6 +124,7 @@ export default {
       db.collection('library').doc(id).delete()
       const index = this.library.findIndex(item => item.id === id )
       this.library.splice(index, 1)
+      this.deleteSnackbar = true
     },
     toggleCompletion(item, id) {
       item.completed = !item.completed
