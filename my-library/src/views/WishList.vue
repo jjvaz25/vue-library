@@ -119,7 +119,6 @@ export default {
   },
   methods: {
     sortBy(prop) {
-      console.log('hey')
       this.wishlist.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
     },
     deleteItem(id) {

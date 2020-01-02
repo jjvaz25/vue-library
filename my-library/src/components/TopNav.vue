@@ -92,7 +92,6 @@ export default {
       links: [
         { icon: 'folder', text: 'My Library', route: '/' },
         { icon: 'folder_special', text: 'Wish List', route: '/wish-list' },
-        { icon: 'email', text: 'Contact', route: '/contact' },
       ]
     }
   }

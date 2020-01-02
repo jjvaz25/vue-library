@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MyLibrary from '../views/MyLibrary.vue'
 import WishList from '../views/WishList.vue'
-import Contact from '../views/Contact.vue'
 
 Vue.use(VueRouter)
 
@@ -16,11 +15,6 @@ const routes = [
     path: '/wish-list',
     name: 'wish-list',
     component: WishList
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: Contact
   },
 ]
 

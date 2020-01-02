@@ -124,7 +124,6 @@ export default {
   },
   methods: {
     sortBy(prop) {
-      console.log('hey')
       this.library.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
     },
     deleteItem(id) {
@@ -145,7 +144,7 @@ export default {
       this.library[index].creator = doc.data().creator
       this.library[index].category = doc.data().category
       this.library[index].rating = doc.data().rating
-    }
+    },
   },
   created() {
     db.collection('library').orderBy('time').onSnapshot(res => {
